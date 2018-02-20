@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import axios from 'axios'
 
 import SearchBar from './components/SearchBar.jsx'
 class App extends React.Component{
@@ -14,7 +15,9 @@ class App extends React.Component{
 
   searchArtist(e) {
     e.preventDefault()
-    console.log(this.state.artist)
+    axios.post('search', {
+      searchTerm: this.state.artist
+    })
   }
 
   render() {
