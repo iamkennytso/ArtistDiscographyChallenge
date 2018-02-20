@@ -8,7 +8,8 @@ class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      artist: 'World'
+      artist: 'World',
+      albums: []
     }
     this.searchArtist.bind(this)
   }
@@ -18,6 +19,7 @@ class App extends React.Component{
     axios.post('search', {
       searchTerm: this.state.artist
     })
+      .then(payload => this.setState({albums: payload.data}))
   }
 
   render() {
@@ -29,6 +31,7 @@ class App extends React.Component{
             setArtist={(artist) => this.setState({artist})} 
             searchArtist={(e) => this.searchArtist(e)}
           />
+          <pre><code>{JSON.stringify(this.state.albums, null, 4)}</code></pre>
         </div>
       </MuiThemeProvider>
     )
