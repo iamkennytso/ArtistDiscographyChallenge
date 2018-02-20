@@ -34,16 +34,17 @@ app.post('/search', (req, res) => {
       })
         .then(payload2 => {
           payload2.data.results
-            .filter(meh => meh.collectionPrice > 2)
+            .filter(album => album.collectionPrice > 2 && (album.collectionExplicitness !== 'explicit'))
             .forEach((album) => {
               let obj = {}
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
               obj.release = album.releaseDate
+              obj.explicit = album.collectionExplicitness
               arr.push(obj)
             })
+          console.log(arr)
           res.send(arr)
         }) 
-
     })
 })
