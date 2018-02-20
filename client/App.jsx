@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import SearchBar from './components/SearchBar.jsx'
 class App extends React.Component{
   constructor(props) {
     super(props);
@@ -11,14 +13,17 @@ class App extends React.Component{
 
   render() {
     return(
-      <div>
-        Hello {this.state.artist}
-      </div>
+      <MuiThemeProvider>
+        <div>
+          Hello {this.state.artist}
+          <SearchBar />
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
 
 ReactDOM.render(
-  <App />,
+   <App /> ,
   document.getElementById('app')
 );
