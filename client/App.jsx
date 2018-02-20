@@ -9,6 +9,12 @@ class App extends React.Component{
     this.state = {
       artist: 'World'
     }
+    this.searchArtist.bind(this)
+  }
+
+  searchArtist(e) {
+    e.preventDefault()
+    console.log(this.state.artist)
   }
 
   render() {
@@ -16,7 +22,10 @@ class App extends React.Component{
       <MuiThemeProvider>
         <div>
           Hello {this.state.artist}
-          <SearchBar />
+          <SearchBar 
+            setArtist={(artist) => this.setState({artist})} 
+            searchArtist={(e) => this.searchArtist(e)}
+          />
         </div>
       </MuiThemeProvider>
     )

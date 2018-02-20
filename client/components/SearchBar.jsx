@@ -4,11 +4,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const searchBar = (props) => {
   return (
-    <form>
+    <form onSubmit={props.searchArtist}>
       <TextField
         hintText="Artist Search"
+        onChange={(e, val) => props.setArtist(val)}
       />
-      <RaisedButton label="Submit" type="submit" primary={true} />
+      <RaisedButton label="Search" type="submit" primary={true} />
     </form>
   )
 }
