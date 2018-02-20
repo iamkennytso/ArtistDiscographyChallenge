@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import axios from 'axios'
 
 import SearchBar from './components/SearchBar.jsx'
+import Table from './components/Table.jsx'
 class App extends React.Component{
   constructor(props) {
     super(props);
@@ -31,6 +32,7 @@ class App extends React.Component{
             setArtist={(artist) => this.setState({artist})} 
             searchArtist={(e) => this.searchArtist(e)}
           />
+          <Table albums={this.state.albums} />
           <pre><code>{JSON.stringify(this.state.albums, null, 4)}</code></pre>
         </div>
       </MuiThemeProvider>

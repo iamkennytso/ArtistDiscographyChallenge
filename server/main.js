@@ -15,7 +15,7 @@ app.listen(port, function() {
 })
 
 app.post('/search', (req, res) => {
-  const obj = {}
+  const arr = []
   axios.get('https://itunes.apple.com/search', {
     params: { 
       term: req.body.searchTerm,
@@ -35,8 +35,15 @@ app.post('/search', (req, res) => {
         .then(payload2 => {
           payload2.data.results
             .filter(meh => meh.collectionPrice > 2)
-            .forEach((album) => obj[album.collectionName] = album.artworkUrl100)
-          res.send(obj)
-        })  
+            .forEach((album) => {
+              let obj = {}
+              obj.name = album.collectionName
+              obj.art = album.artworkUrl100
+              obj.release = album.releaseDate
+              arr.push(obj)
+            })
+          res.send(arr)
+        }) 
+
     })
 })
