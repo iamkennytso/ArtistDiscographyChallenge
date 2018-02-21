@@ -4,7 +4,7 @@
   "description": "Artist Discography Coding Challenge",
   "main": "server/main.js",
   "scripts": {
-    "start": "install && webpack && node server/main.js"
+    "start": "webpack && node server/main.js"
   },
   "repository": {
     "type": "git",
