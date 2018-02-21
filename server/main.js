@@ -17,29 +17,42 @@ app.listen(port, function() {
 app.post('/search', (req, res) => {
   const artist = {albums:[]}
   console.log(req.body.searchTerm)
+  //start API call
   axios.get('https://itunes.apple.com/search', {
     params: { 
       term: req.body.searchTerm,
       media: 'music',
       entity: 'album',
       attribute: 'artistTerm',
-      limit: '1' 
+      limit: '200' 
     },
   })
     .then(payload => {
-      artist.name = payload.data.results[0].artistName
-      artist.link = payload.data.results[0].artistViewUrl
-      axios.get('https://itunes.apple.com/lookup', {
-        params: {
-          id: payload.data.results[0].artistId,
-          entity:'album',
-          limit: '200' 
-        }
-      })
-        .then(payload2 => {
-          payload2.data.results
-            .filter(album => album.collectionPrice > 2 && (album.collectionExplicitness !== 'explicit'))
+      // artist.name = payload.data.results[0].artistName
+      // artist.link = payload.data.results[0].artistViewUrl
+      // axios.get('https://itunes.apple.com/lookup', {
+      //   params: {
+      //     id: payload.data.results[0].artistId,
+      //     entity:'album',
+      //     limit: '200' 
+      //   }
+      // })
+      //   .then(payload2 => {
+      //     payload2.data.results
+          payload.data.results
+          //lines 33-41 & 65, without 42 and 51, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
+          //eventually, there should be an option for client to choose if collabs are wanted
+            .filter(album => {
+              return (
+                //avoids singles. Assumption: full albums are always more than $2. 
+                album.collectionPrice > 2 
+                //to avoid duplicate albums. Assumption: there's always a cleaned up version of an album.
+                && (album.collectionExplicitness !== 'explicit') 
+                && album.artistName === artist.name
+              )}
+            )
             .forEach((album) => {
+              console.log(album)
               let obj = {}
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
@@ -49,5 +62,5 @@ app.post('/search', (req, res) => {
             })
           res.send(artist)
         }) 
-    })
+    // })
 })
