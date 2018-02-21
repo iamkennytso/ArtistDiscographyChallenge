@@ -40,7 +40,7 @@ app.post('/search', (req, res) => {
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
               obj.release = album.releaseDate
-              obj.explicit = album.collectionExplicitness
+              obj.link = album.collectionViewUrl
               arr.push(obj)
             })
           console.log(arr)

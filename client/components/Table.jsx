@@ -24,7 +24,7 @@ const table = (props) => {
             return (
               <TableRow key={album.name}>
                 <TableRowColumn > <img src={album.art} /> </TableRowColumn>
-                <TableRowColumn > {album.name} </TableRowColumn>
+                <TableRowColumn > <a href={album.link}>{album.name}</a> </TableRowColumn>
               </TableRow>
             )
           })
