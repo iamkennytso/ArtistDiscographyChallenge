@@ -9,7 +9,7 @@ class App extends React.Component{
     super(props);
     this.state = {
       searchTerm: 'World',
-      albums: []
+      data: {albums:[]}
     }
     this.searchArtist.bind(this)
   }
@@ -19,7 +19,7 @@ class App extends React.Component{
     axios.post('search', {
       searchTerm: this.state.searchTerm
     })
-      .then(payload => this.setState({albums: payload.data}))
+      .then(payload => this.setState({data: payload.data}))
   }
 
   render() {
@@ -29,8 +29,13 @@ class App extends React.Component{
             setSearchTerm={(searchTerm) => this.setState({searchTerm})} 
             searchArtist={(e) => this.searchArtist(e)}
           />
-          <Table albums={this.state.albums} />
-          <pre><code>{JSON.stringify(this.state.albums, null, 4)}</code></pre>
+          {this.state.data.albums[0] ? (
+            <div>
+              <h1><a href={this.state.data.link} >{this.state.data.name} </a></h1>
+              <Table albums={this.state.data.albums} /> 
+            </div>
+            ) : <h1>Search for an artist with the search bar above!</h1>
+          }
         </div>
     )
   }

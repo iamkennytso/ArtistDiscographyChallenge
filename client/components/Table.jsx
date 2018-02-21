@@ -8,6 +8,7 @@ const table = (props) => {
         <TableRow>
           <TableCell style={{ 'fontWeight': 'bold' }}> Album Art  </TableCell>
           <TableCell style={{ 'fontWeight': 'bold' }}> Album Name </ TableCell>
+          {/* <TableCell style={{ 'fontWeight': 'bold' }}> Release Date </ TableCell> */}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -17,6 +18,7 @@ const table = (props) => {
               <TableRow key={album.name}>
                 <TableCell > <img src={album.art} /> </TableCell>
                 <TableCell > <a href={album.link}>{album.name}</a> </TableCell>
+                {/* <TableCell > {album.release} </TableCell> */}
               </TableRow>
             )
           })

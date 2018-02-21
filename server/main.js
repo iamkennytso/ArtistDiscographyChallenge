@@ -15,7 +15,7 @@ app.listen(port, function() {
 })
 
 app.post('/search', (req, res) => {
-  const arr = []
+  const artist = {albums:[]}
   console.log(req.body.searchTerm)
   axios.get('https://itunes.apple.com/search', {
     params: { 
@@ -27,6 +27,8 @@ app.post('/search', (req, res) => {
     },
   })
     .then(payload => {
+      artist.name = payload.data.results[0].artistName
+      artist.link = payload.data.results[0].artistViewUrl
       axios.get('https://itunes.apple.com/lookup', {
         params: {
           id: payload.data.results[0].artistId,
@@ -41,11 +43,11 @@ app.post('/search', (req, res) => {
               let obj = {}
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
-              obj.release = album.releaseDate
+              // obj.release = album.releaseDate
               obj.link = album.collectionViewUrl
-              arr.push(obj)
+              artist.albums.push(obj)
             })
-          res.send(arr)
+          res.send(artist)
         }) 
     })
 })
