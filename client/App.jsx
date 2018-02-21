@@ -8,12 +8,13 @@ class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: 'World',
+      searchTerm: '',
       data: {albums:[]}
     }
     this.searchArtist.bind(this)
   }
 
+  //backend call to search apple API and set data
   searchArtist(e) {
     e.preventDefault()
     axios.post('search', {
@@ -30,6 +31,7 @@ class App extends React.Component{
             setSearchTerm={(searchTerm) => this.setState({searchTerm})} 
             searchArtist={(e) => this.searchArtist(e)}
           />
+          {/* ternary statement to render bottom portion of page */}
           {this.state.data.albums[0] ? (
             <div>
               <h2>Discography for: <a href={this.state.data.link} >{this.state.data.name} </a></h2>
