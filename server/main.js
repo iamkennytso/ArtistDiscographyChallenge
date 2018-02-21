@@ -32,8 +32,8 @@ app.post('/search', (req, res) => {
     },
   })
     .then(payload => {
-      // artist.name = payload.data.results[0].artistName
-      // artist.link = payload.data.results[0].artistViewUrl
+      artist.name = payload.data.results[0].artistName
+      artist.link = payload.data.results[0].artistViewUrl
       // axios.get('https://itunes.apple.com/lookup', {
       //   params: {
       //     id: payload.data.results[0].artistId,
@@ -44,7 +44,7 @@ app.post('/search', (req, res) => {
       //   .then(payload2 => {
       //     payload2.data.results
           payload.data.results
-          //lines 33-41 & 65, without 42 and 51, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
+          //lines 37-45 & 65, without 46 and 55, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
           //eventually, there should be an option for client to choose if collabs are wanted
             .filter(album => {
               return (
