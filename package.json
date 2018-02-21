@@ -4,7 +4,7 @@
   "description": "Artist Discography Coding Challenge",
   "main": "server/main.js",
   "scripts": {
-    "start": "webpack && node server/main.js"
+    "start": "install && webpack && node server/main.js"
   },
   "repository": {
     "type": "git",
@@ -12,14 +12,12 @@
   },
   "author": "Kenneth Tso | iamkennytso@gmail.com",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
     "compression": "^1.7.2",
-    "webpack": "^3.11.0"
-  },
-  "dependencies": {
+    "webpack": "^3.11.0",
     "axios": "^0.18.0",
     "express": "^4.16.2",
     "material-ui": "^1.0.0-beta.34",
