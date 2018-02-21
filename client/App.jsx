@@ -9,7 +9,7 @@ class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      artist: 'World',
+      searchTerm: 'World',
       albums: []
     }
     this.searchArtist.bind(this)
@@ -18,7 +18,7 @@ class App extends React.Component{
   searchArtist(e) {
     e.preventDefault()
     axios.post('search', {
-      searchTerm: this.state.artist
+      searchTerm: this.state.searchTerm
     })
       .then(payload => this.setState({albums: payload.data}))
   }
@@ -27,9 +27,8 @@ class App extends React.Component{
     return(
       <MuiThemeProvider>
         <div>
-          Hello {this.state.artist}
           <SearchBar 
-            setArtist={(artist) => this.setState({artist})} 
+            setSearchTerm={(searchTerm) => this.setState({searchTerm})} 
             searchArtist={(e) => this.searchArtist(e)}
           />
           <Table albums={this.state.albums} />

@@ -7,7 +7,7 @@ const searchBar = (props) => {
     <form onSubmit={props.searchArtist}>
       <TextField
         hintText="Artist Search"
-        onChange={(e, val) => props.setArtist(val)}
+        onChange={(e, val) => props.setSearchTerm(val)}
       />
       <RaisedButton label="Search" type="submit" primary={true} />
     </form>

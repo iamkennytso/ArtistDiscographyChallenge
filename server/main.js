@@ -16,6 +16,7 @@ app.listen(port, function() {
 
 app.post('/search', (req, res) => {
   const arr = []
+  console.log(req.body.searchTerm)
   axios.get('https://itunes.apple.com/search', {
     params: { 
       term: req.body.searchTerm,
@@ -29,7 +30,8 @@ app.post('/search', (req, res) => {
       axios.get('https://itunes.apple.com/lookup', {
         params: {
           id: payload.data.results[0].artistId,
-          entity:'album'
+          entity:'album',
+          limit: '200' 
         }
       })
         .then(payload2 => {
@@ -43,7 +45,6 @@ app.post('/search', (req, res) => {
               obj.link = album.collectionViewUrl
               arr.push(obj)
             })
-          console.log(arr)
           res.send(arr)
         }) 
     })
