@@ -1,30 +1,22 @@
 import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 const table = (props) => {
   return (
     <Table>
-      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+      <TableHead>
         <TableRow>
-          <TableHeaderColumn style={{ 'fontWeight': 'bold' }}>  </TableHeaderColumn>
-          <TableHeaderColumn> Album Art </ TableHeaderColumn>
-          <TableHeaderColumn> Album Name </ TableHeaderColumn>
+          <TableCell style={{ 'fontWeight': 'bold' }}> Album Art  </TableCell>
+          <TableCell style={{ 'fontWeight': 'bold' }}> Album Name </ TableCell>
         </TableRow>
-      </TableHeader>
-      <TableBody displayRowCheckbox={false} showRowHover={true} >
+      </TableHead>
+      <TableBody>
         {
           props.albums.map(album => {
             return (
               <TableRow key={album.name}>
-                <TableRowColumn > <img src={album.art} /> </TableRowColumn>
-                <TableRowColumn > <a href={album.link}>{album.name}</a> </TableRowColumn>
+                <TableCell > <img src={album.art} /> </TableCell>
+                <TableCell > <a href={album.link}>{album.name}</a> </TableCell>
               </TableRow>
             )
           })

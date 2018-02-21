@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import axios from 'axios'
 
 import SearchBar from './components/SearchBar.jsx'
@@ -25,7 +24,6 @@ class App extends React.Component{
 
   render() {
     return(
-      <MuiThemeProvider>
         <div>
           <SearchBar 
             setSearchTerm={(searchTerm) => this.setState({searchTerm})} 
@@ -34,7 +32,6 @@ class App extends React.Component{
           <Table albums={this.state.albums} />
           <pre><code>{JSON.stringify(this.state.albums, null, 4)}</code></pre>
         </div>
-      </MuiThemeProvider>
     )
   }
 }

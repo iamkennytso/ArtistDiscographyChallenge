@@ -1,15 +1,19 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
 const searchBar = (props) => {
   return (
     <form onSubmit={props.searchArtist}>
       <TextField
-        hintText="Artist Search"
-        onChange={(e, val) => props.setSearchTerm(val)}
+        label="Search field"
+        type="search"
+        onChange={(e) => props.setSearchTerm(e.target.value)}
       />
-      <RaisedButton label="Search" type="submit" primary={true} />
+      {'  '}
+      <Button variant="raised" color="primary" type="submit">
+        Search
+      </Button>
     </form>
   )
 }
