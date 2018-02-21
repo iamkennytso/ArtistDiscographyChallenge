@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+//decision to use axios for promises
 const axios = require('axios')
+const compress = require('compression')
 let app = express();
 let port = process.env.PORT || 1337
 
 app.use(express.static(__dirname + '/../public'));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+//for compression
+app.use(compress());
 app.listen(port, function() {
 	console.log(`               Your Application is Ready.               `);
 	console.log('                Open a browser and go to:               ')

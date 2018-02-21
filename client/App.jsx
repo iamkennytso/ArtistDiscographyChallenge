@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//decision to use axios for promises
 import axios from 'axios'
 
 import SearchBar from './components/SearchBar.jsx'
