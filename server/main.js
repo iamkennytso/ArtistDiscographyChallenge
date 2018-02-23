@@ -60,7 +60,7 @@ app.post('/search', (req, res) => {
               let obj = {}
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
-              // obj.release = album.releaseDate
+              obj.release = new Date (album.releaseDate)
               obj.link = album.collectionViewUrl
               artist.albums.push(obj)
             })

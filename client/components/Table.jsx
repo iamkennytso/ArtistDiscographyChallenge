@@ -9,7 +9,7 @@ const table = (props) => {
           <TableCell style={{ 'fontWeight': 'bold' }}> Album Art  </TableCell>
           <TableCell style={{ 'fontWeight': 'bold' }}> Album Name </ TableCell>
           {/* I wanted to sort by release dates, but the itunes API release dates are very inaccurate? */}
-          {/* <TableCell style={{ 'fontWeight': 'bold' }}> Release Date </ TableCell> */}
+          <TableCell style={{ 'fontWeight': 'bold' }}> Release Date </ TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -20,7 +20,7 @@ const table = (props) => {
                 <TableCell > <img src={album.art} /> </TableCell>
                 <TableCell > <a href={album.link}>{album.name}</a> </TableCell>
                 {/* Eventually want to make this table sortable by either title or release date */}
-                {/* <TableCell > {album.release} </TableCell> */}
+                <TableCell > {album.release.getMonth()}/{album.release.getDate()}/{album.release.getYear()} </TableCell>
               </TableRow>
             )
           })
