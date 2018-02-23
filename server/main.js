@@ -20,7 +20,6 @@ app.listen(port, function() {
 
 app.post('/search', (req, res) => {
   const artist = {albums:[]}
-  console.log(req.body.searchTerm)
   //start API call
   axios.get('https://itunes.apple.com/search', {
     params: { 
@@ -56,7 +55,6 @@ app.post('/search', (req, res) => {
               )}
             )
             .forEach((album) => {
-              console.log(album)
               let obj = {}
               obj.name = album.collectionName
               obj.art = album.artworkUrl100
