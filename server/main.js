@@ -43,7 +43,7 @@ app.post('/search', (req, res) => {
       //   .then(payload2 => {
       //     payload2.data.results
           payload.data.results
-          //lines 36-44 & 67, without 45, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
+          //lines 36-44 & 66, without 45, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
           //eventually, there should be an option for client to choose if collabs are wanted
             .filter(album => {
               return (
@@ -61,9 +61,9 @@ app.post('/search', (req, res) => {
               obj.release = album.releaseDate
               obj.link = album.collectionViewUrl
               artist.albums.push(obj)
-              console.log(album.releaseDate)
             })
           res.send(artist)
-        }) 
-    // })
+        // })
+    })
+    .catch(err => error.log('Back end Search Error', err)) 
 })

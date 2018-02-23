@@ -30,6 +30,7 @@ class App extends React.Component{
         payload.data.albums.sort((album1, album2) => album2.release - album1.release)
         this.setState({data: payload.data})
       })
+      .catch(err => console.error('Search Artist Error', err))
   }
 
   render() {
