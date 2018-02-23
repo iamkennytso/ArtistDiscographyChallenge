@@ -22,10 +22,12 @@ class App extends React.Component{
       searchTerm: this.state.searchTerm
     })
       .then(payload => {
+        //convert release dates to date objects
         for(let i = 0; i < payload.data.albums.length; i++){
           payload.data.albums[i].release = new Date(payload.data.albums[i].release)
         }
-        payload.data.albums.sort((album1, album2) => album1.release + album2.release)
+        //default sort by date
+        payload.data.albums.sort((album1, album2) => album2.release - album1.release)
         this.setState({data: payload.data})
       })
   }
