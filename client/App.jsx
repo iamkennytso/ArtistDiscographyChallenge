@@ -25,6 +25,7 @@ class App extends React.Component{
         for(let i = 0; i < payload.data.albums.length; i++){
           payload.data.albums[i].release = new Date(payload.data.albums[i].release)
         }
+        payload.data.albums.sort((album1, album2) => album1.release + album2.release)
         this.setState({data: payload.data})
       })
   }
