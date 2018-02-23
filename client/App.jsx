@@ -21,7 +21,12 @@ class App extends React.Component{
     axios.post('search', {
       searchTerm: this.state.searchTerm
     })
-      .then(payload => this.setState({data: payload.data}))
+      .then(payload => {
+        for(let i = 0; i < payload.data.albums.length; i++){
+          payload.data.albums[i].release = new Date(payload.data.albums[i].release)
+        }
+        this.setState({data: payload.data})
+      })
   }
 
   render() {

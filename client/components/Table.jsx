@@ -20,7 +20,7 @@ const table = (props) => {
                 <TableCell > <img src={album.art} /> </TableCell>
                 <TableCell > <a href={album.link}>{album.name}</a> </TableCell>
                 {/* Eventually want to make this table sortable by either title or release date */}
-                <TableCell > {album.release.getMonth()}/{album.release.getDate()}/{album.release.getYear()} </TableCell>
+                <TableCell > {album.release.getMonth()+1}/{album.release.getDate()}/{String(album.release.getFullYear()).slice(2,4)} </TableCell>
               </TableRow>
             )
           })
