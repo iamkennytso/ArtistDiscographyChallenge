@@ -10,7 +10,8 @@ class App extends React.Component{
     super(props);
     this.state = {
       searchTerm: '',
-      data: {albums:[]}
+      data: {albums:[]},
+      deepSearch:false
     }
     this.searchArtist.bind(this)
   }
@@ -40,6 +41,8 @@ class App extends React.Component{
           <SearchBar 
             setSearchTerm={(searchTerm) => this.setState({searchTerm})} 
             searchArtist={(e) => this.searchArtist(e)}
+            deepSearch={this.state.deepSearch}
+            toggleDeepSearch={()=>this.setState({deepSearch:!this.state.deepSearch})}
           />
           {/* ternary statement to render bottom portion of page */}
           {this.state.data.albums[0] ? (
