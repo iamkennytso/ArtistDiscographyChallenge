@@ -20,7 +20,8 @@ class App extends React.Component{
   searchArtist(e) {
     e.preventDefault()
     axios.post('search', {
-      searchTerm: this.state.searchTerm
+      searchTerm: this.state.searchTerm,
+      deepSearch: this.state.deepSearch
     })
       .then(payload => {
         //convert release dates to date objects

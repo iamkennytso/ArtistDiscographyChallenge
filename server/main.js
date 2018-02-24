@@ -18,6 +18,30 @@ app.listen(port, function() {
 	console.log(`                    +--------------+                    `)
 })
 
+const formatArtistData = (artist, payload, deep) => {
+  payload.data.results
+  .filter(album => {
+    return (
+      //avoids singles. Assumption: albums are more than $2, and more than 5 tracks. 
+      album.collectionPrice > 2 
+      && (album.trackCount > 5)
+      //avoids duplicate albums. Assumption: there's always a cleaned up version of an album.
+      && (album.collectionExplicitness !== 'explicit') 
+      //this isn't needed for iTunes lookup
+      && (deep ? true: album.artistName === artist.name)
+    )}
+  )
+  .forEach((album) => {
+    let obj = {}
+    obj.name = album.collectionName
+    obj.art = album.artworkUrl100
+    obj.release = album.releaseDate
+    obj.link = album.collectionViewUrl
+    artist.albums.push(obj)
+  })
+  return artist
+}
+
 app.post('/search', (req, res) => {
   const artist = {albums:[]}
   //start API call
@@ -31,39 +55,22 @@ app.post('/search', (req, res) => {
     },
   })
     .then(payload => {
-      artist.name = payload.data.results[0].artistName
+      artist.name = payload.data.results[0].artistName 
       artist.link = payload.data.results[0].artistViewUrl
-      // axios.get('https://itunes.apple.com/lookup', {
-      //   params: {
-      //     id: payload.data.results[0].artistId,
-      //     entity:'album',
-      //     limit: '200' 
-      //   }
-      // })
-      //   .then(payload2 => {
-      //     payload2.data.results
-          payload.data.results
-          //lines 36-44 & 66, without 45, includes collab albums, like Kanye's Watch The Throne, but requires another API call.
-          //eventually, there should be an option for client to choose if collabs are wanted
-            .filter(album => {
-              return (
-                //avoids singles. Assumption: full albums are always more than $2. 
-                album.collectionPrice > 2 
-                //to avoid duplicate albums. Assumption: there's always a cleaned up version of an album.
-                && (album.collectionExplicitness !== 'explicit') 
-                && album.artistName === artist.name
-              )}
-            )
-            .forEach((album) => {
-              let obj = {}
-              obj.name = album.collectionName
-              obj.art = album.artworkUrl100
-              obj.release = album.releaseDate
-              obj.link = album.collectionViewUrl
-              artist.albums.push(obj)
-            })
-          res.send(artist)
-        // })
+      //'deep search' is initiated by user selection on a toggle switch
+      //'deep search' is a search using iTunes lookup instead of search
+      //takes longer because of second API call, but more accurate
+      if (!req.body.deepSearch) res.send(formatArtistData(artist, payload))
+      else {
+        axios.get('https://itunes.apple.com/lookup', {
+          params: {
+            id: payload.data.results[0].artistId,
+            entity:'album',
+            limit: '200' 
+          }
+        })
+          .then(payload2 => res.send(formatArtistData(artist, payload2, true)))
+      }
     })
     .catch(err => error.log('Back end Search Error', err)) 
 })
