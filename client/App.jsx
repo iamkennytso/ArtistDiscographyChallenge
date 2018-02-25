@@ -38,8 +38,22 @@ class App extends React.Component{
       .catch(err => console.error('Search Artist Error', err))
   }
 
-  sortClick(prop) {
-    console.log('click', prop)
+  sortClick(prop, ord) {
+    const orderBy = prop
+    const order = ord 
+      ? 'asc'
+      : this.state.orderBy = prop && this.state.order === 'desc'
+        ? 'asc'
+        : 'desc'
+    console.log(orderBy)
+    console.log(order)
+    console.log(this.state.data.albums[0][orderBy])
+    const data =
+        order === 'desc'
+          ? this.state.data.albums.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
+          : this.state.data.albums.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
+    console.log(data)
+    this.setState({ order, orderBy })
   }
 
   render() {
@@ -60,7 +74,7 @@ class App extends React.Component{
                 albums={this.state.data.albums} 
                 orderBy={this.state.orderBy} 
                 order = {this.state.order} 
-                sortClick={(p)=>this.sortClick(p)}
+                sortClick={(prop)=>this.sortClick(prop)}
               /> 
             </div>
             ) : <h2>Search for an artist with the search bar above!</h2>
