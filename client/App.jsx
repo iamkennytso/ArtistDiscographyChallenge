@@ -11,9 +11,12 @@ class App extends React.Component{
     this.state = {
       searchTerm: '',
       data: {albums:[]},
-      deepSearch:false
+      orderBy: 'release',
+      order: 'desc',
+      deepSearch: false
     }
-    this.searchArtist.bind(this)
+    this.searchArtist = this.searchArtist.bind(this)
+    this.sortClick = this.sortClick.bind(this)
   }
 
   //backend call to search apple API and set data
@@ -35,6 +38,10 @@ class App extends React.Component{
       .catch(err => console.error('Search Artist Error', err))
   }
 
+  sortClick(prop) {
+    console.log('click', prop)
+  }
+
   render() {
     return(
         <div>
@@ -49,7 +56,12 @@ class App extends React.Component{
           {this.state.data.albums[0] ? (
             <div>
               <h2>Discography for: <a href={this.state.data.link} >{this.state.data.name} </a></h2>
-              <Table albums={this.state.data.albums} /> 
+              <Table 
+                albums={this.state.data.albums} 
+                orderBy={this.state.orderBy} 
+                order = {this.state.order} 
+                sortClick={(p)=>this.sortClick(p)}
+              /> 
             </div>
             ) : <h2>Search for an artist with the search bar above!</h2>
           }
