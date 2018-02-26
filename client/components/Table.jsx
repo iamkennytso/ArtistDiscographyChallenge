@@ -11,14 +11,22 @@ const table = (props) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell > Album Art   </TableCell>
-          <TableCell > 
-            <TableSortLabel active={props.orderBy === 'name'} direction={props.order} onClick={()=>props.sortClick('name')}> 
+          <TableCell> Album Art   </TableCell>
+          <TableCell> 
+            <TableSortLabel 
+              active={props.orderBy === 'name'} 
+              direction={props.order} 
+              onClick={()=>props.sortClick('name')}
+            > 
               Album Name 
             </TableSortLabel>
           </TableCell>
-          <TableCell > 
-            <TableSortLabel active={props.orderBy === 'release'} direction={props.order} onClick={()=>props.sortClick('release')}> 
+          <TableCell> 
+            <TableSortLabel 
+              active={props.orderBy === 'release'} 
+              direction={props.order} 
+              onClick={()=>props.sortClick('release')}
+            > 
               Release Date 
             </TableSortLabel>
           </TableCell>
@@ -30,9 +38,9 @@ const table = (props) => {
             let releaseDate = album.release
             return (
               <TableRow key={album.link}>
-                <TableCell > <img src={album.art} /> </TableCell>
+                {/* the href below can be replaced with a RegEx */}
+                <TableCell > <a href={album.art.slice(0,-13).concat('1920x1920bb.jpg')}> <img src={album.art} /> </a> </TableCell>
                 <TableCell > <a href={album.link}>{album.name}</a> </TableCell>
-                {/* Eventually want to make this table sortable by user input */}
                 <TableCell > {releaseDate.getMonth()+1}/{releaseDate.getDate()}/{String(releaseDate.getFullYear()).slice(2,4)} </TableCell>
               </TableRow>
             )

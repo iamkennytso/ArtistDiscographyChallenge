@@ -31,7 +31,7 @@ class App extends React.Component{
         for(let i = 0; i < payload.data.albums.length; i++){
           payload.data.albums[i].release = new Date(payload.data.albums[i].release)
         }
-        //set State, then sort
+        //set state, then sort by release
         this.setState({data: payload.data}, () => this.sortClick('release', 'desc'))
       })
       .catch(err => console.error('Search Artist Error', err))
@@ -45,8 +45,7 @@ class App extends React.Component{
         ? 'asc'
         : 'desc'
     order === 'desc'
-      ? this.state.data.albums.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-      : this.state.data.albums.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
+      this.state.data.albums.sort((a, b) => b[orderBy] < a[orderBy] ? -1 : 1)
     this.setState({ order, orderBy })
   }
 
@@ -69,7 +68,7 @@ class App extends React.Component{
                   <Table 
                     albums={this.state.data.albums} 
                     orderBy={this.state.orderBy} 
-                    order = {this.state.order} 
+                    order={this.state.order} 
                     sortClick={(prop)=>this.sortClick(prop)}
                   /> 
                 </div> 
