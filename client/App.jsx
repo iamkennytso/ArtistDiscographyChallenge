@@ -75,7 +75,7 @@ class App extends React.Component{
                   /> 
                 </div> 
               ) 
-            : <h2>Search for an artist with the search bar above!</h2> 
+            : null
           }
         </div>
     )

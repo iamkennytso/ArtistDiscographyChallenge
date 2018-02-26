@@ -6,9 +6,9 @@ import Tooltip from 'material-ui/Tooltip';
 
 const searchBar = (props) => {
   return (
-    <form onSubmit={props.searchArtist}>
+    <form onSubmit={props.searchArtist} id="center">
       <TextField
-        label="Search field"
+        label="Search Artist"
         type="search"
         onChange={(e) => props.setSearchTerm(e.target.value)}
       />
@@ -24,7 +24,6 @@ const searchBar = (props) => {
       <Button variant="raised" color="primary" type="submit">
         Search
       </Button>
-
     </form>
   )
 }
