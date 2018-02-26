@@ -2,11 +2,6 @@ import React from 'react';
 import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from 'material-ui/Table';
 
 const table = (props) => {
-
-  const meh = () => {
-    console.log('hello')
-  }
-
   return (
     <Table>
       <TableHead>
