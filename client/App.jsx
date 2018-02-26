@@ -44,8 +44,10 @@ class App extends React.Component{
       : this.state.orderBy = prop && this.state.order === 'desc'
         ? 'asc'
         : 'desc'
-    order === 'desc'
-      this.state.data.albums.sort((a, b) => b[orderBy] < a[orderBy] ? -1 : 1)
+    this.state.data.albums.sort((a, b) => order === 'desc' 
+      ? (b[orderBy] < a[orderBy] ? -1 : 1) 
+      : (a[orderBy] < b[orderBy] ? -1 : 1)
+    )
     this.setState({ order, orderBy })
   }
 
