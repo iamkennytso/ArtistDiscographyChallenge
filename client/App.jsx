@@ -75,17 +75,7 @@ class App extends React.Component{
                   /> 
                 </div> 
               ) 
-            : 
-              (
-              <div>
-                <h2>Search for an artist with the search bar above!</h2>
-                <br/>
-                Deep search takes the best result for the artist search, then does a secondary API call, 
-                using look up, for that artist.
-                <br/>
-                Results take longer to load, but should be more accurate.
-              </div>
-              )
+            : <h2>Search for an artist with the search bar above!</h2> 
           }
         </div>
     )
